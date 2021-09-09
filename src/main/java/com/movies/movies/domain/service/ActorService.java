@@ -5,6 +5,8 @@ import com.movies.movies.api.v1.assembler.ActorAssembler;
 import com.movies.movies.api.v1.model.ActorModel;
 import com.movies.movies.domain.model.Actor;
 import com.movies.movies.domain.repository.ActorRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +29,8 @@ public class ActorService {
         return actorModel;
     }
 
-    public List<ActorModel> getAll(){
-        return actorAssembler.toCollectionModel(actorRepository.findAll());
+    public Page<ActorModel> getAll(Pageable pageable){
+        Page<Actor> allActors = actorRepository.findAll(pageable);
+        return actorAssembler.toCollectionModel(allActors);
     }
 }

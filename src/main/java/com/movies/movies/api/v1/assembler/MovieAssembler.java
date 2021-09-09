@@ -4,6 +4,7 @@ import com.movies.movies.api.v1.model.MovieModel;
 import com.movies.movies.domain.model.Movie;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class MovieAssembler {
         return modelMapper.map(movie, MovieModel.class);
     }
 
-    public List<MovieModel> toCollectionModel(List<Movie> movies){
-        return movies.stream().map(this::toModel).collect(Collectors.toList());
+    public Page<MovieModel> toCollectionModel(Page<Movie> movies){
+        return movies.map(this::toModel);
     }
 }

@@ -5,6 +5,8 @@ import com.movies.movies.domain.model.Category;
 
 import com.movies.movies.domain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +27,8 @@ public class CategoryController {
     }
 
     @GetMapping
-    public List<CategoryModel> getAll(){
-        return categoryService.getAll();
+    public Page<CategoryModel> getAll(Pageable pageable){
+        return categoryService.getAll(pageable);
     }
 
     @GetMapping("/{id}")

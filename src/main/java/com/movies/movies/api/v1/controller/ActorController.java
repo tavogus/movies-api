@@ -3,6 +3,8 @@ package com.movies.movies.api.v1.controller;
 import com.movies.movies.api.v1.model.ActorModel;
 import com.movies.movies.domain.model.Actor;
 import com.movies.movies.domain.service.ActorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class ActorController {
     }
 
     @GetMapping
-    public List<ActorModel> getAll(){
-        return actorService.getAll();
+    public Page<ActorModel> getAll(Pageable pageable){
+        return actorService.getAll(pageable);
     }
 
     @PostMapping

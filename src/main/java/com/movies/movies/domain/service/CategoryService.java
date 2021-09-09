@@ -7,6 +7,8 @@ import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.model.Category;
 import com.movies.movies.domain.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,9 @@ public class CategoryService {
         return categoryModel;
     }
 
-    public List<CategoryModel> getAll(){
-        return categoryAssembler.toCollectionModel(categoryRepository.findAll());
+    public Page<CategoryModel> getAll(Pageable pageable){
+        Page<Category> allCategories = categoryRepository.findAll(pageable);
+        return categoryAssembler.toCollectionModel(allCategories);
     }
 
     public ResponseEntity<CategoryModel> getCategory(Long id){

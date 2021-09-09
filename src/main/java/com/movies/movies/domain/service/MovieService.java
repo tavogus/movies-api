@@ -7,6 +7,8 @@ import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.model.Movie;
 import com.movies.movies.domain.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +38,8 @@ public class MovieService {
         return movieModel;
     }
 
-    public List<MovieModel> getAll(){
-        List<Movie> allMovies = movieRepository.findAll();
+    public Page<MovieModel> getAll(Pageable pageable){
+        Page<Movie> allMovies = movieRepository.findAll(pageable);
         return movieAssembler.toCollectionModel(allMovies);
     }
 

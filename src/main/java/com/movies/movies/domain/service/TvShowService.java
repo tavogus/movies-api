@@ -7,6 +7,8 @@ import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.model.TvShow;
 import com.movies.movies.domain.repository.TvShowRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,9 @@ public class TvShowService {
         return tvShowModel;
     }
 
-    public List<TvShowModel> getAll(){
-        return tvShowAssembler.toCollectionModel(tvShowRepository.findAll());
+    public Page<TvShowModel> getAll(Pageable pageable){
+        Page<TvShow> allTvShows = tvShowRepository.findAll(pageable);
+        return tvShowAssembler.toCollectionModel(allTvShows);
     }
 
     public ResponseEntity<TvShowModel> getTvShow(Long id){
