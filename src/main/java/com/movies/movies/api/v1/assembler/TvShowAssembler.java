@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Component
-public class TvshowAssembler {
+public class TvShowAssembler {
 
     private ModelMapper modelMapper;
 

@@ -1,28 +1,47 @@
 package com.movies.movies.domain.service;
 
+import com.movies.movies.api.v1.ResourceUriHelper;
+import com.movies.movies.api.v1.assembler.CategoryAssembler;
+import com.movies.movies.api.v1.model.CategoryModel;
 import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.model.Category;
 import com.movies.movies.domain.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final CategoryAssembler categoryAssembler;
 
     @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository, CategoryAssembler categoryAssembler) {
         this.categoryRepository = categoryRepository;
+        this.categoryAssembler = categoryAssembler;
     }
 
-    public Category save(Category category) {
+    public CategoryModel save(Category category) {
         boolean alreadyExistingCategory = categoryRepository.findByName(category.getName()).stream().anyMatch(existingCategory -> !existingCategory.equals(category));
 
         if (alreadyExistingCategory){
             throw new BusinessException("Already exists a category with this name.");
         }
 
-        return categoryRepository.save(category);
+        categoryRepository.save(category);
+        CategoryModel categoryModel = categoryAssembler.toModel(category);
+        ResourceUriHelper.addUriInResponseHeader(categoryModel.getId());
+        return categoryModel;
+    }
+
+    public List<CategoryModel> getAll(){
+        return categoryAssembler.toCollectionModel(categoryRepository.findAll());
+    }
+
+    public ResponseEntity<CategoryModel> getCategory(Long id){
+        return categoryRepository.findById(id).map(category -> ResponseEntity.ok(categoryAssembler.toModel(category))).orElse(ResponseEntity.notFound().build());
     }
 }
