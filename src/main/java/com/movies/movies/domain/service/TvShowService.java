@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class TvShowService {
         ResourceUriHelper.addUriInResponseHeader(tvShowModel.getId());
         return tvShowModel;
     }
-
+    @Transactional(readOnly = true)
     public Page<TvShowModel> getAll(Pageable pageable){
         Page<TvShow> allTvShows = tvShowRepository.findAll(pageable);
         return tvShowAssembler.toCollectionModel(allTvShows);

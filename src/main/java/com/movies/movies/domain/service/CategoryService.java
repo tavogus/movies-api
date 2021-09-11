@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class CategoryService {
         ResourceUriHelper.addUriInResponseHeader(categoryModel.getId());
         return categoryModel;
     }
-
+    @Transactional(readOnly = true)
     public Page<CategoryModel> getAll(Pageable pageable){
         Page<Category> allCategories = categoryRepository.findAll(pageable);
         return categoryAssembler.toCollectionModel(allCategories);

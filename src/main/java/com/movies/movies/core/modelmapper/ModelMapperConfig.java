@@ -1,4 +1,4 @@
-package com.movies.movies.core;
+package com.movies.movies.core.modelmapper;
 
 import com.movies.movies.api.v1.model.MovieModel;
 import com.movies.movies.api.v1.model.TvShowModel;

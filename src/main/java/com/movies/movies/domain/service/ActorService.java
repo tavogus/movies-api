@@ -8,6 +8,7 @@ import com.movies.movies.domain.repository.ActorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ActorService {
         ResourceUriHelper.addUriInResponseHeader(actorModel.getId());
         return actorModel;
     }
-
+    @Transactional(readOnly = true)
     public Page<ActorModel> getAll(Pageable pageable){
         Page<Actor> allActors = actorRepository.findAll(pageable);
         return actorAssembler.toCollectionModel(allActors);

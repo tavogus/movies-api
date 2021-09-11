@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class MovieService {
         ResourceUriHelper.addUriInResponseHeader(movieModel.getId());
         return movieModel;
     }
-
+    @Transactional(readOnly = true)
     public Page<MovieModel> getAll(Pageable pageable){
         Page<Movie> allMovies = movieRepository.findAll(pageable);
         return movieAssembler.toCollectionModel(allMovies);
