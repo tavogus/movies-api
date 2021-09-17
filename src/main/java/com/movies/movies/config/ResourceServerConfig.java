@@ -31,11 +31,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 
-    private static final String[] CREATE_ACCOUNT = { "api/users/**" };
+    private static final String[] CREATE_ACCOUNT = { "v1/users/**" };
 
-    private static final String[] USERS = { "api/users/**" };
+    private static final String[] USERS = { "v1/users/**" };
 
-    private static final String[] POST_DATA = { "/v1/movies" };
+    private static final String[] POST_DATA = { "/v1/movies/**", "/v1/tvshows/**", "/v1/categories/**", "/v1/actors"};
 
     private static final String[] VISITOR_AND_MEMBER = { "/v1/movies/**", "/v1/tvshows/**", "/v1/categories/**", "/v1/actors"};
 
@@ -58,7 +58,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(USERS).hasRole("MEMBER") // Somente para poder testar a rota mas o certo seria ter um ROLE_ADMIN por exemplo
                 .antMatchers(HttpMethod.POST, POST_DATA).hasRole("MEMBER")
 //		.antMatchers(HttpMethod.GET, VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER")
-                .antMatchers(VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER") // Somente para testes
+               // .antMatchers(VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER") // Somente para testes
                 .anyRequest().authenticated();
 
         http.cors().configurationSource(corsConfigurationSource());

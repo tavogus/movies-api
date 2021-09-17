@@ -23,6 +23,7 @@ public class ActorService {
         this.actorAssembler = actorAssembler;
     }
 
+    @Transactional
     public ActorModel save(Actor actor){
         actorRepository.save(actor);
         ActorModel actorModel = actorAssembler.toModel(actor);

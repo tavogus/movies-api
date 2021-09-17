@@ -27,6 +27,7 @@ public class MovieService {
         this.movieAssembler = movieAssembler;
     }
 
+    @Transactional
     public MovieModel save(Movie movie){
         boolean alreadyExistingMovie = movieRepository.findByTitle(movie.getTitle()).stream().anyMatch(existingMovie -> !existingMovie.equals(movie));
 
@@ -44,6 +45,7 @@ public class MovieService {
         return movieAssembler.toCollectionModel(allMovies);
     }
 
+    @Transactional
     public ResponseEntity<MovieModel> getMovie(Long id){
         return movieRepository.findById(id).map(movie -> ResponseEntity.ok(movieAssembler.toModel(movie))).orElse(ResponseEntity.notFound().build());
     }

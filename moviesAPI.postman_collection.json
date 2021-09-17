@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "d79c9125-2233-4eba-bfc8-5105cce9a525",
+		"name": "moviesAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/v1/categories",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE5MjY5MjAsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiJjZjk0NDJiZi04YmFjLTQ4MTMtYjNkMy1kZWUzMDFjYmE1NDgiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.hLOtNKS3hu_1x6rCB5RoA3OeOW68Kni-uqzElunPar0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE1NzQyNzgsInVzZXJfbmFtZSI6ImJvYkBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1ZJU0lUT1IiXSwianRpIjoiNWE1YWY4Y2QtNWEyZS00MTIxLTk4YmUtZjc4NDE3YzJkYjA3IiwiY2xpZW50X2lkIjoibW92aWVmbGl4Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl19.SIeNDDN7ExGpWz23gMBhExbQaGIuaeEgOyVIR55O91g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"ficção cientifca\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/categories",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/movies",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE5MjY5MjAsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiJjZjk0NDJiZi04YmFjLTQ4MTMtYjNkMy1kZWUzMDFjYmE1NDgiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.hLOtNKS3hu_1x6rCB5RoA3OeOW68Kni-uqzElunPar0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE1NzQ1ODYsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiI2MjM3ZjJjZi1iMGQ4LTRlZDUtOGQxMi04ZWJjZjQ5ZTMzNzAiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.PnhHpsRPJGQw9u3VbL_WHqo2igcEp2k0ikJQDPHBPJ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"teste\",\r\n    \"actors\": [\r\n       {\r\n         \"id\": 1\r\n       },\r\n       {\r\n         \"id\": 2\r\n       }\r\n     ],\r\n    \"author\": \"teste\",\r\n    \"synopsis\": \"filme teste\",\r\n    \"category\": { \"id\": 1}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/movies/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"movies",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/v1/tvshows",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE1NzQ1ODYsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiI2MjM3ZjJjZi1iMGQ4LTRlZDUtOGQxMi04ZWJjZjQ5ZTMzNzAiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.PnhHpsRPJGQw9u3VbL_WHqo2igcEp2k0ikJQDPHBPJ4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n    \"title\":\"friends\",\r\n    \"actors\": [\r\n       {\r\n         \"id\": 1\r\n       },\r\n       {\r\n         \"id\": 2\r\n       }\r\n     ],\r\n    \"author\": \"kaufman seiquela\",\r\n    \"synopsis\": \"amigos que vivem numa realidade paralela\",\r\n    \"seasons\": 7,\r\n    \"category\": { \"id\": 1}\r\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/tvshows/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"tvshows",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/v1/actors",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE1NzQyNzgsInVzZXJfbmFtZSI6ImJvYkBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX1ZJU0lUT1IiXSwianRpIjoiNWE1YWY4Y2QtNWEyZS00MTIxLTk4YmUtZjc4NDE3YzJkYjA3IiwiY2xpZW50X2lkIjoibW92aWVmbGl4Iiwic2NvcGUiOlsicmVhZCIsIndyaXRlIl19.SIeNDDN7ExGpWz23gMBhExbQaGIuaeEgOyVIR55O91g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"teste 5\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/v1/actors",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"actors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/oauth/token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "movieflix123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "movieflix",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "ana@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/oauth/token",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/v1/users",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE3NDkxOTEsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiIwYzBmNjQ3Zi04OTFmLTQxOWQtYjMzNi1jNTE5OGZlNDQ4MjkiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.Uxi3QWCV6QnrBrNxJjZeiyKvcRR1ADlJLkYcs6eMTaY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/v1/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/v1/users/3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzE3NDkxOTEsInVzZXJfbmFtZSI6ImFuYUBnbWFpbC5jb20iLCJhdXRob3JpdGllcyI6WyJST0xFX01FTUJFUiJdLCJqdGkiOiIwYzBmNjQ3Zi04OTFmLTQxOWQtYjMzNi1jNTE5OGZlNDQ4MjkiLCJjbGllbnRfaWQiOiJtb3ZpZWZsaXgiLCJzY29wZSI6WyJyZWFkIiwid3JpdGUiXX0.Uxi3QWCV6QnrBrNxJjZeiyKvcRR1ADlJLkYcs6eMTaY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"gustavo\",\r\n\"email\": \"gustavo@gmail.com\",\r\n\"password\": \"1234\",\r\n\"roles\": [{\"id\":1}]}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/v1/users/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"users",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

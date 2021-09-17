@@ -27,6 +27,7 @@ public class CategoryService {
         this.categoryAssembler = categoryAssembler;
     }
 
+    @Transactional
     public CategoryModel save(Category category) {
         boolean alreadyExistingCategory = categoryRepository.findByName(category.getName()).stream().anyMatch(existingCategory -> !existingCategory.equals(category));
 
@@ -45,6 +46,7 @@ public class CategoryService {
         return categoryAssembler.toCollectionModel(allCategories);
     }
 
+    @Transactional
     public ResponseEntity<CategoryModel> getCategory(Long id){
         return categoryRepository.findById(id).map(category -> ResponseEntity.ok(categoryAssembler.toModel(category))).orElse(ResponseEntity.notFound().build());
     }

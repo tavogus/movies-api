@@ -27,6 +27,7 @@ public class TvShowService {
         this.tvShowAssembler = tvShowAssembler;
     }
 
+    @Transactional
     public TvShowModel save(TvShow tvShow){
         boolean alreadyExistingTvShow = tvShowRepository.findByTitle(tvShow.getTitle()).stream().anyMatch(existingTvShow -> !existingTvShow.equals(tvShow));
 
@@ -45,6 +46,7 @@ public class TvShowService {
         return tvShowAssembler.toCollectionModel(allTvShows);
     }
 
+    @Transactional
     public ResponseEntity<TvShowModel> getTvShow(Long id){
         return tvShowRepository.findById(id).map(tvShow -> ResponseEntity.ok(tvShowAssembler.toModel(tvShow))).orElse(ResponseEntity.notFound().build());
     }
