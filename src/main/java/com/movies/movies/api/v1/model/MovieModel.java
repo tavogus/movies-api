@@ -16,4 +16,5 @@ public class MovieModel {
     private String author;
     private String synopsis;
     private Integer releaseDate;
+    private String tags;
 }

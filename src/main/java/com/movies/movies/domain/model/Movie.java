@@ -48,11 +48,11 @@ public class Movie {
     private String synopsis;
 
     private Integer releaseDate;
-/*
+
     @NotBlank
     @Column(nullable = false)
-    private List<String> tags;
-*/
+    private String tags;
+
     @ManyToMany
     @JoinTable(name = "movie_actor",
             joinColumns = {@JoinColumn(name = "movie_id", referencedColumnName = "id")},

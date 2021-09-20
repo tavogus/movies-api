@@ -9,8 +9,10 @@ create table movie(
    title varchar(60) not null,
    category_id bigint not null,
    insertion_date datetime not null,
+   release_date int not null,
    author varchar(60) not null,
    synopsis text not null,
+   tags text not null,
    primary key (id)
 );
 
@@ -19,6 +21,7 @@ create table tv_show(
    title varchar(60) not null,
    category_id bigint not null,
    insertion_date datetime not null,
+   release_date int not null,
    author varchar(60) not null,
    synopsis text not null,
    seasons int not null,
