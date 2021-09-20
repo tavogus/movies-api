@@ -10,9 +10,10 @@ public class MovieModel {
 
     private Long id;
     private String title;
-    private String category;
+    private String categoryName;
     private OffsetDateTime insertionDate;
     private List<MovieActorModel> actors;
     private String author;
     private String synopsis;
+    private Integer releaseDate;
 }

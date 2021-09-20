@@ -2,21 +2,24 @@ package com.movies.movies.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Data
+@Builder
 public class Movie {
 
     @EqualsAndHashCode.Include
@@ -43,10 +46,12 @@ public class Movie {
     @NotBlank
     @Column(nullable = false)
     private String synopsis;
+
+    private Integer releaseDate;
 /*
     @NotBlank
     @Column(nullable = false)
-    private String actors;
+    private List<String> tags;
 */
     @ManyToMany
     @JoinTable(name = "movie_actor",

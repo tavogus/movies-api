@@ -16,7 +16,7 @@ public class ModelMapperConfig {
         var modelMapper = new ModelMapper();
 
         var movieToMovieModelTypeMap = modelMapper.createTypeMap(Movie.class, MovieModel.class);
-        movieToMovieModelTypeMap.<String>addMapping(src -> src.getCategory().getName(), (dest, value) -> dest.setCategory(value));
+        movieToMovieModelTypeMap.<String>addMapping(src -> src.getCategory().getName(), (dest, value) -> dest.setCategoryName(value));
 
         var tvShowToTvShowModelTypeMap = modelMapper.createTypeMap(TvShow.class, TvShowModel.class);
         tvShowToTvShowModelTypeMap.<String>addMapping(src -> src.getCategory().getName(), (dest, value) -> dest.setCategory(value));
