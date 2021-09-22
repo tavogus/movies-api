@@ -9,6 +9,7 @@ import com.movies.movies.domain.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,7 +43,7 @@ public class MovieService {
     @Transactional(readOnly = true)
     public Page<MovieModel> getAll(Pageable pageable){
         Page<Movie> allMovies = movieRepository.findAll(pageable);
-        return movieAssembler.toCollectionModel(allMovies);
+        return movieAssembler.toCollectionModelPaged(allMovies);
     }
 
     @Transactional
@@ -50,4 +51,8 @@ public class MovieService {
         return movieRepository.findById(id).map(movie -> ResponseEntity.ok(movieAssembler.toModel(movie))).orElse(ResponseEntity.notFound().build());
     }
 
+    @Transactional
+    public List<MovieModel> findByTitle(String title) {
+        return movieAssembler.toCollectionModel(movieRepository.findByTitleContaining(title));
+    }
 }

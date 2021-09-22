@@ -20,7 +20,11 @@ public class MovieAssembler {
         return modelMapper.map(movie, MovieModel.class);
     }
 
-    public Page<MovieModel> toCollectionModel(Page<Movie> movies){
+    public Page<MovieModel> toCollectionModelPaged(Page<Movie> movies){
         return movies.map(this::toModel);
     }
+
+    public List<MovieModel> toCollectionModel(List<Movie> movies) {
+        return movies.stream().map(this::toModel).collect(Collectors.toList());
+}
 }

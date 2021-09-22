@@ -6,7 +6,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data
-public class MovieModel {
+public class MovieModel{
 
     private Long id;
     private String title;

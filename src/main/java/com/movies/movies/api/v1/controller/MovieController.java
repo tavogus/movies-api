@@ -41,4 +41,9 @@ public class MovieController {
     public MovieModel addMovie(@Valid @RequestBody Movie movie){
         return movieService.save(movie);
     }
+
+    @GetMapping("/find-by-title/{title}")
+    public List<MovieModel> findByTitle(@PathVariable String title){
+        return movieService.findByTitle(title);
+    }
 }
