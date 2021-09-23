@@ -1,8 +1,9 @@
 package com.movies.movies.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
+
+import lombok.*;
 import lombok.EqualsAndHashCode;
 import java.util.List;
 
@@ -10,9 +11,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 
+@Getter
+@Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Data
 public class Category {
 
     @EqualsAndHashCode.Include
@@ -23,6 +25,7 @@ public class Category {
     @NotBlank
     @Column(nullable = false)
     private String name;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)

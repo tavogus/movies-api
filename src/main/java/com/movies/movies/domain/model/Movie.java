@@ -20,7 +20,6 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Data
-@Builder
 public class Movie{
 
     @EqualsAndHashCode.Include

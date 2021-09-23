@@ -3,13 +3,17 @@ package com.movies.movies.domain.service;
 
 import com.movies.movies.api.v1.assembler.MovieAssembler;
 
+import com.movies.movies.api.v1.controller.MovieController;
 import com.movies.movies.api.v1.model.MovieModel;
 import com.movies.movies.domain.exception.ActorNotFoundException;
 import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.exception.CategoryNotFoundException;
 import com.movies.movies.domain.exception.MovieNotFoundException;
+import com.movies.movies.domain.model.Category;
 import com.movies.movies.domain.model.Movie;
+import com.movies.movies.domain.repository.CategoryRepository;
 import com.movies.movies.domain.repository.MovieRepository;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.hateoas.CollectionModel;
@@ -17,17 +21,23 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 
 @Service
 public class MovieService {
 
+    private static Logger logger = org.slf4j.LoggerFactory.getLogger(MovieService.class);
+
     private final MovieRepository movieRepository;
     private final MovieAssembler movieAssembler;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, MovieAssembler movieAssembler) {
+    public MovieService(MovieRepository movieRepository, MovieAssembler movieAssembler, CategoryRepository categoryRepository) {
         this.movieRepository = movieRepository;
         this.movieAssembler = movieAssembler;
+        this.categoryRepository = categoryRepository;
     }
 
     @Transactional
@@ -56,7 +66,16 @@ public class MovieService {
         return movieAssembler.toCollectionModel(movieRepository.findByTitleContaining(title));
     }
 
+    @Transactional
+    public CollectionModel<MovieModel> findByCategory(String categoryName) {
+        Optional<Category> movie = categoryRepository.findByName(categoryName);
+
+        return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(movie.get().getId()));
+    }
+
     private Movie findOrFail(Long id) {
         return movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
     }
+
+
 }
