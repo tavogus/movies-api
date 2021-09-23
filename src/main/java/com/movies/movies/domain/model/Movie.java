@@ -2,15 +2,16 @@ package com.movies.movies.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
+
 import java.util.List;
 
 @AllArgsConstructor
@@ -20,7 +21,7 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-public class Movie {
+public class Movie{
 
     @EqualsAndHashCode.Include
     @Id

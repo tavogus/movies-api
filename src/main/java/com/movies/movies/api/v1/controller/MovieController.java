@@ -7,6 +7,7 @@ import com.movies.movies.domain.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class MovieController {
     }
 
     @GetMapping
-    public Page<MovieModel> getAll(Pageable pageable){
-        return movieService.getAll(pageable);
+    public CollectionModel<MovieModel> getAll(){
+        return movieService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<MovieModel> getMovie(@PathVariable Long id){
+    public MovieModel getMovie(@PathVariable Long id){
         return movieService.getMovie(id);
     }
 
@@ -43,7 +44,7 @@ public class MovieController {
     }
 
     @GetMapping("/find-by-title/{title}")
-    public List<MovieModel> findByTitle(@PathVariable String title){
+    public CollectionModel<MovieModel> findByTitle(@PathVariable String title){
         return movieService.findByTitle(title);
     }
 }

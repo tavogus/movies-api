@@ -7,6 +7,7 @@ import com.movies.movies.domain.service.TvShowService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,12 +28,12 @@ public class TvShowController {
     }
 
     @GetMapping
-    public Page<TvShowModel> getAll(Pageable pageable){
-        return tvShowService.getAll(pageable);
+    public CollectionModel<TvShowModel> getAll(){
+        return tvShowService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TvShowModel> getTvshow(@PathVariable Long id){
+    public TvShowModel getTvshow(@PathVariable Long id){
         return tvShowService.getTvShow(id);
     }
 

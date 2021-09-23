@@ -1,12 +1,13 @@
 package com.movies.movies.api.v1.model;
 
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
 @Data
-public class TvShowModel {
+public class TvShowModel extends RepresentationModel<TvShowModel> {
 
     private Long id;
     private String title;

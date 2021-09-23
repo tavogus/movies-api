@@ -32,11 +32,7 @@ public class TvShow {
 
     @CreationTimestamp
     private OffsetDateTime insertionDate;
-    /*
-    @NotBlank
-    @Column(nullable = false)
-    private String actors;
-    */
+
     @NotBlank
     @Column(nullable = false)
     private String author;
@@ -46,6 +42,8 @@ public class TvShow {
     private String synopsis;
 
     private Integer seasons;
+
+    private Integer releaseDate;
 
     @ManyToMany
     @JoinTable(name = "tvshow_actor",
