@@ -43,6 +43,11 @@ public class TvShowController {
         return tvShowService.save(tvShow);
     }
 
+    @GetMapping("/find-by-title/{title}")
+    public CollectionModel<TvShowModel> findByTitle(@PathVariable String title){
+        return tvShowService.findByTitle(title);
+    }
+
     @GetMapping("/find-by-category/{categoryName}")
     public CollectionModel<TvShowModel> findByCategory(@PathVariable String categoryName){
         return tvShowService.findByCategory(categoryName);

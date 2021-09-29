@@ -51,13 +51,19 @@ public class TvShowService {
         return tvShowAssembler.toModel(tvShow);
     }
 
-    private TvShow findOrFail(Long id) {
-        return tvShowRepository.findById(id).orElseThrow(() -> new TvShowNotFoundException(id));
+    @Transactional
+    public CollectionModel<TvShowModel> findByTitle(String title) {
+        return tvShowAssembler.toCollectionModel(tvShowRepository.findByTitleContaining(title));
     }
 
+    @Transactional
     public CollectionModel<TvShowModel> findByCategory(String categoryName) {
         Optional<Category> movie = categoryRepository.findByName(categoryName);
 
         return tvShowAssembler.toCollectionModel(tvShowRepository.findMoviesByCategory(movie.get().getId()));
+    }
+
+    private TvShow findOrFail(Long id) {
+        return tvShowRepository.findById(id).orElseThrow(() -> new TvShowNotFoundException(id));
     }
 }
