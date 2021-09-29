@@ -1,8 +1,10 @@
 package com.movies.movies.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -11,6 +13,8 @@ import javax.validation.constraints.NotEmpty;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Data
@@ -44,6 +48,9 @@ public class TvShow {
     private Integer seasons;
 
     private Integer releaseDate;
+
+    @ElementCollection
+    private List<String> tags;
 
     @ManyToMany
     @JoinTable(name = "tvshow_actor",

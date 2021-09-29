@@ -49,9 +49,8 @@ public class Movie{
 
     private Integer releaseDate;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String tags;
+    @ElementCollection
+    private List<String> tags;
 
     @ManyToMany
     @JoinTable(name = "movie_actor",

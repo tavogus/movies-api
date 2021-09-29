@@ -26,7 +26,6 @@ public class Category {
     @Column(nullable = false)
     private String name;
 
-
     @JsonManagedReference
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Movie> movies = new ArrayList<Movie>();

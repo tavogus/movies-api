@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class CategoryMovieModel {
 
-    private Long MovieId;
-    private String MovieTitle;
+    private Long movieId;
+    private String movieTitle;
 }

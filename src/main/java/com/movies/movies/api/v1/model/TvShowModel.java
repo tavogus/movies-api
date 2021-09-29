@@ -17,4 +17,5 @@ public class TvShowModel extends RepresentationModel<TvShowModel> {
     private String author;
     private String synopsis;
     private Integer seasons;
+    private List<String> tags;
 }

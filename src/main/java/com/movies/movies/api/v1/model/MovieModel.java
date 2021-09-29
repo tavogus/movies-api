@@ -19,5 +19,5 @@ public class MovieModel extends RepresentationModel<MovieModel> {
     private String author;
     private String synopsis;
     private Integer releaseDate;
-    private String tags;
+    private List<String> tags;
 }

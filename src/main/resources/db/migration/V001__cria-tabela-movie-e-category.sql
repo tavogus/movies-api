@@ -12,7 +12,6 @@ create table movie(
    release_date int not null,
    author varchar(60) not null,
    synopsis text not null,
-   tags text not null,
    primary key (id)
 );
 
@@ -44,8 +43,24 @@ create table tvshow_actor(
     actor_id bigint not null
 );
 
+create table movie_tags(
+    movie_id bigint not null,
+    tags text not null
+);
+
+create table tv_show_tags(
+    tv_show_id bigint not null,
+    tags text not null
+);
+
 alter table movie add constraint fk_movie_category
 foreign key (category_id) references category (id);
 
 alter table tv_show add constraint fk_tv_show_category
 foreign key (category_id) references category (id);
+
+alter table movie_tags add constraint fk_movie_tags
+foreign key (movie_id) references movie (id);
+
+alter table tv_show_tags add constraint fk_tvshow_tags
+foreign key (tv_show_id) references tv_show (id);
