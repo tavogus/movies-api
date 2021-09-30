@@ -68,9 +68,9 @@ public class MovieService {
 
     @Transactional
     public CollectionModel<MovieModel> findByCategory(String categoryName) {
-        Optional<Category> movie = categoryRepository.findByName(categoryName);
+        Optional<Category> category = categoryRepository.findByName(categoryName);
 
-        return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(movie.get().getId()));
+        return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(category.get().getId()));
     }
 
     private Movie findOrFail(Long id) {
