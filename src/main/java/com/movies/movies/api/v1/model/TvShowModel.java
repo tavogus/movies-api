@@ -13,9 +13,10 @@ public class TvShowModel extends RepresentationModel<TvShowModel> {
     private String title;
     private String category;
     private OffsetDateTime insertionDate;
-    private List<TvShowActorModel> actors;
+    private List<ActorModel> actors;
     private String author;
     private String synopsis;
     private Integer seasons;
+    private Integer releaseDate;
     private List<String> tags;
 }

@@ -1,10 +1,11 @@
 package com.movies.movies.api.v1.model;
 
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 @Data
-public class CategoryTvShowModel {
+public class CategoryTvShowModel{
 
-    private Long tvShowId;
-    private String tvShowTitle;
+    private Long id;
+    private String title;
 }
