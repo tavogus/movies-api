@@ -37,7 +37,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     private static final String[] POST_DATA = { "/v1/movies/**", "/v1/tvshows/**", "/v1/categories/**", "/v1/actors"};
 
-    private static final String[] VISITOR_AND_MEMBER = { "/v1/movies/**", "/v1/tvshows/**", "/v1/categories/**", "/v1/actors"};
+    private static final String[] GET_DATA = { "/v1/movies/**", "/v1/tvshows/**", "/v1/categories/**", "/v1/actors"};
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -55,10 +55,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(PUBLIC).permitAll()
                 .antMatchers(HttpMethod.POST, CREATE_ACCOUNT).permitAll()
-                .antMatchers(USERS).hasRole("MEMBER") // Somente para poder testar a rota mas o certo seria ter um ROLE_ADMIN por exemplo
-                .antMatchers(HttpMethod.POST, POST_DATA).hasRole("MEMBER")
-//		.antMatchers(HttpMethod.GET, VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER")
-               // .antMatchers(VISITOR_AND_MEMBER).hasAnyRole("VISITOR", "MEMBER") // Somente para testes
+                .antMatchers(USERS).hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, POST_DATA).hasRole("ADMIN")
+		        .antMatchers(HttpMethod.GET, GET_DATA).hasAnyRole("ADMIN", "USER")
                 .anyRequest().authenticated();
 
         http.cors().configurationSource(corsConfigurationSource());
