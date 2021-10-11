@@ -48,4 +48,9 @@ public class TvShowController {
     public CollectionModel<TvShowModel> findByCategory(@PathVariable String categoryName){
         return tvShowService.findByCategory(categoryName);
     }
+
+    @GetMapping("/find-by-actor/{actorName}")
+    public CollectionModel<TvShowModel> findByActor(@PathVariable String actorName){
+        return tvShowService.findByActor(actorName);
+    }
 }

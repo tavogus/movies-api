@@ -62,29 +62,29 @@ public class MovieService {
         return movieAssembler.toCollectionModel(movieRepository.findAll());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public MovieModel getMovie(Long id){
         Movie movie = findOrFail(id);
 
         return movieAssembler.toModel(movie);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByTitle(String title) {
         return movieAssembler.toCollectionModel(movieRepository.findByTitleContaining(title));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByCategory(String categoryName) {
         Optional<Category> category = categoryRepository.findByName(categoryName);
 
         return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(category.get().getId()));
     }
-
+    @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByActor(String actorName) {
         Optional<Actor> actor = actorRepository.findByName(actorName);
 
-        return movieAssembler.toCollectionModel(movieRepository.findMoviesByActors(actor.get().getId()));
+        return movieAssembler.toCollectionModel(movieRepository.findMoviesByActorsId(actor.get().getId()));
     }
 
     private Movie findOrFail(Long id) {

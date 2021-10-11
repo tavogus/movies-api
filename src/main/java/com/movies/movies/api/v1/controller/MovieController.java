@@ -49,7 +49,7 @@ public class MovieController {
         return  movieService.findByCategory(categoryName);
     }
 
-    @GetMapping("/find-by-actor/{categoryName}")
+    @GetMapping("/find-by-actor/{actorName}")
     public CollectionModel<MovieModel> findByActor(@PathVariable String actorName){
         return  movieService.findByActor(actorName);
     }

@@ -16,4 +16,6 @@ public interface TvShowRepository extends JpaRepository<TvShow, Long> {
     List<TvShow> findByTitleContaining(String title);
 
     Optional<TvShow> findByTitle(String title);
+
+    List<TvShow> findTvShowsByActorsId(Long id);
 }
