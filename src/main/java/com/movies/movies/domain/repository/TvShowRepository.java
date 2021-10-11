@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TvShowRepository extends JpaRepository<TvShow, Long> {
 
@@ -13,4 +14,6 @@ public interface TvShowRepository extends JpaRepository<TvShow, Long> {
     List<TvShow> findMoviesByCategory(@Param("category")Long id);
 
     List<TvShow> findByTitleContaining(String title);
+
+    Optional<TvShow> findByTitle(String title);
 }

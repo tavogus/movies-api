@@ -4,19 +4,13 @@ package com.movies.movies.api.v1.controller;
 import com.movies.movies.api.v1.model.MovieModel;
 import com.movies.movies.domain.model.Movie;
 import com.movies.movies.domain.service.MovieService;
-
-import org.slf4j.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.util.List;
+
 
 @RestController
 @RequestMapping(path = "/v1/movies", produces = MediaType.APPLICATION_JSON_VALUE)

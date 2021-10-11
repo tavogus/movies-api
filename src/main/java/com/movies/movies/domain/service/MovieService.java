@@ -2,9 +2,7 @@ package com.movies.movies.domain.service;
 
 
 import com.movies.movies.api.v1.assembler.MovieAssembler;
-
 import com.movies.movies.api.v1.model.MovieModel;
-import com.movies.movies.domain.exception.ActorNotFoundException;
 import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.exception.CategoryNotFoundException;
 import com.movies.movies.domain.exception.MovieNotFoundException;
@@ -16,13 +14,11 @@ import com.movies.movies.domain.repository.CategoryRepository;
 import com.movies.movies.domain.repository.MovieRepository;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.hateoas.CollectionModel;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
+
 
 
 @Service
@@ -45,11 +41,20 @@ public class MovieService {
 
     @Transactional
     public MovieModel save(Movie movie){
-        try{
-            return movieAssembler.toModel(movieRepository.save(movie));
-        } catch (CategoryNotFoundException | ActorNotFoundException e){
-            throw new BusinessException(e.getMessage());
+
+        boolean movieExists = movieRepository.findByTitle(movie.getTitle()).stream().anyMatch(existingMovie -> !existingMovie.equals(movie));
+
+        if (movieExists){
+            throw new BusinessException("Already exists a movie with this title!");
         }
+
+        Optional<Category> category = categoryRepository.findById(movie.getCategory().getId());
+
+        if (category.isEmpty()){
+            throw new CategoryNotFoundException("There is no category with the given id");
+        }
+
+        return movieAssembler.toModel(movieRepository.save(movie));
     }
 
     @Transactional(readOnly = true)

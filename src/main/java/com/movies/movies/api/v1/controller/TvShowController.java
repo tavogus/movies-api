@@ -3,16 +3,12 @@ package com.movies.movies.api.v1.controller;
 
 import com.movies.movies.api.v1.model.TvShowModel;
 import com.movies.movies.domain.model.TvShow;
-
 import com.movies.movies.domain.service.TvShowService;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 

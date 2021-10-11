@@ -2,7 +2,6 @@ package com.movies.movies.domain.service;
 
 import com.movies.movies.api.v1.assembler.TvShowAssembler;
 import com.movies.movies.api.v1.model.TvShowModel;
-import com.movies.movies.domain.exception.ActorNotFoundException;
 import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.exception.CategoryNotFoundException;
 import com.movies.movies.domain.exception.TvShowNotFoundException;
@@ -33,11 +32,21 @@ public class TvShowService {
 
     @Transactional
     public TvShowModel save(TvShow tvShow){
-        try{
-            return tvShowAssembler.toModel(tvShowRepository.save(tvShow));
-        } catch (CategoryNotFoundException | ActorNotFoundException e){
-            throw new BusinessException(e.getMessage());
+
+        boolean tvshowExists = tvShowRepository.findByTitle(tvShow.getTitle()).stream().anyMatch(existingTvShow -> !existingTvShow.equals(tvShow));
+
+        if (tvshowExists){
+            throw new BusinessException("Already exists a tv show with this title!");
         }
+
+        Optional<Category> category = categoryRepository.findById(tvShow.getCategory().getId());
+
+        if (category.isEmpty()){
+            throw new CategoryNotFoundException("There is no category with the given id");
+        }
+
+        return tvShowAssembler.toModel(tvShowRepository.save(tvShow));
+
     }
     @Transactional(readOnly = true)
     public CollectionModel<TvShowModel> getAll(){
