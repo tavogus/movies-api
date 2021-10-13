@@ -4,6 +4,7 @@ package com.movies.movies.domain.service;
 import com.movies.movies.api.v1.assembler.ActorAssembler;
 import com.movies.movies.api.v1.model.ActorModel;
 
+import com.movies.movies.domain.exception.ActorNotFoundException;
 import com.movies.movies.domain.exception.BusinessException;
 import com.movies.movies.domain.model.Actor;
 import com.movies.movies.domain.repository.ActorRepository;

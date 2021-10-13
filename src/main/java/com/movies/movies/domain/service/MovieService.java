@@ -3,9 +3,7 @@ package com.movies.movies.domain.service;
 
 import com.movies.movies.api.v1.assembler.MovieAssembler;
 import com.movies.movies.api.v1.model.MovieModel;
-import com.movies.movies.domain.exception.BusinessException;
-import com.movies.movies.domain.exception.CategoryNotFoundException;
-import com.movies.movies.domain.exception.MovieNotFoundException;
+import com.movies.movies.domain.exception.*;
 import com.movies.movies.domain.model.Actor;
 import com.movies.movies.domain.model.Category;
 import com.movies.movies.domain.model.Movie;
@@ -30,13 +28,16 @@ public class MovieService {
     private final MovieAssembler movieAssembler;
     private final CategoryRepository categoryRepository;
     private final ActorRepository actorRepository;
+    private final ActorService actorService;
+
 
     @Autowired
-    public MovieService(MovieRepository movieRepository, MovieAssembler movieAssembler, CategoryRepository categoryRepository, ActorRepository actorRepository) {
+    public MovieService(MovieRepository movieRepository, MovieAssembler movieAssembler, CategoryRepository categoryRepository, ActorRepository actorRepository, ActorService actorService) {
         this.movieRepository = movieRepository;
         this.movieAssembler = movieAssembler;
         this.categoryRepository = categoryRepository;
         this.actorRepository = actorRepository;
+        this.actorService = actorService;
     }
 
     @Transactional
@@ -54,7 +55,11 @@ public class MovieService {
             throw new CategoryNotFoundException("There is no category with the given id");
         }
 
-        return movieAssembler.toModel(movieRepository.save(movie));
+        try{
+            return movieAssembler.toModel(movieRepository.save(movie));
+        } catch (EntityNotFoundException e){
+            throw new BusinessException(e.getMessage(), e);
+        }
     }
 
     @Transactional(readOnly = true)
@@ -90,6 +95,4 @@ public class MovieService {
     private Movie findOrFail(Long id) {
         return movieRepository.findById(id).orElseThrow(() -> new MovieNotFoundException(id));
     }
-
-
 }

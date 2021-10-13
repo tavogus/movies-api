@@ -53,11 +53,20 @@ create table tv_show_tags(
     tags text not null
 );
 
+alter table movie_actor add constraint pk_movieactor
+primary key (movie_id, actor_id) ;
+
 alter table movie add constraint fk_movie_category
 foreign key (category_id) references category (id);
 
 alter table tv_show add constraint fk_tv_show_category
 foreign key (category_id) references category (id);
+
+alter table movie_actor add constraint fk_movieactor_movie
+foreign key (movie_id) references movie (id);
+
+alter table movie_actor add constraint fk_movieactor_actor
+foreign key (actor_id) references actor (id);
 
 alter table movie_tags add constraint fk_movie_tags
 foreign key (movie_id) references movie (id);
