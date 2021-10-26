@@ -2,9 +2,7 @@ package com.movies.movies.domain.service;
 
 import com.movies.movies.api.v1.assembler.TvShowAssembler;
 import com.movies.movies.api.v1.model.TvShowModel;
-import com.movies.movies.domain.exception.BusinessException;
-import com.movies.movies.domain.exception.CategoryNotFoundException;
-import com.movies.movies.domain.exception.TvShowNotFoundException;
+import com.movies.movies.domain.exception.*;
 import com.movies.movies.domain.model.Actor;
 import com.movies.movies.domain.model.Category;
 import com.movies.movies.domain.model.TvShow;
@@ -45,11 +43,16 @@ public class TvShowService {
 
         Optional<Category> category = categoryRepository.findById(tvShow.getCategory().getId());
 
-        if (category.isEmpty()){
+        if (!category.isPresent()){
             throw new CategoryNotFoundException("There is no category with the given id");
         }
 
-        return tvShowAssembler.toModel(tvShowRepository.save(tvShow));
+        try {
+            return tvShowAssembler.toModel(tvShowRepository.save(tvShow));
+        } catch (EntityNotFoundException e) {
+            throw new BusinessException(e.getMessage(), e);
+        }
+
 
     }
     @Transactional(readOnly = true)
@@ -71,14 +74,22 @@ public class TvShowService {
 
     @Transactional(readOnly = true)
     public CollectionModel<TvShowModel> findByCategory(String categoryName) {
-        Optional<Category> movie = categoryRepository.findByName(categoryName);
+        Optional<Category> category = categoryRepository.findByName(categoryName);
 
-        return tvShowAssembler.toCollectionModel(tvShowRepository.findMoviesByCategory(movie.get().getId()));
+        if (!category.isPresent()) {
+            throw new CategoryNotFoundException("No category found");
+        }
+
+        return tvShowAssembler.toCollectionModel(tvShowRepository.findMoviesByCategory(category.get().getId()));
     }
 
     @Transactional(readOnly = true)
     public CollectionModel<TvShowModel> findByActor(String actorName) {
         Optional<Actor> actor = actorRepository.findByName(actorName);
+
+        if (!actor.isPresent()) {
+            throw new ActorNotFoundException("No actor found");
+        }
 
         return tvShowAssembler.toCollectionModel(tvShowRepository.findTvShowsByActorsId(actor.get().getId()));
     }

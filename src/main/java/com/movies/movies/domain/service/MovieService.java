@@ -51,7 +51,7 @@ public class MovieService {
 
         Optional<Category> category = categoryRepository.findById(movie.getCategory().getId());
 
-        if (category.isEmpty()){
+        if (!category.isPresent()){
             throw new CategoryNotFoundException("There is no category with the given id");
         }
 
@@ -83,11 +83,19 @@ public class MovieService {
     public CollectionModel<MovieModel> findByCategory(String categoryName) {
         Optional<Category> category = categoryRepository.findByName(categoryName);
 
+        if (!category.isPresent()) {
+            throw new CategoryNotFoundException("No category found");
+        }
+
         return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(category.get().getId()));
     }
     @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByActor(String actorName) {
         Optional<Actor> actor = actorRepository.findByName(actorName);
+
+        if (!actor.isPresent()) {
+            throw new ActorNotFoundException("No actor found");
+        }
 
         return movieAssembler.toCollectionModel(movieRepository.findMoviesByActorsId(actor.get().getId()));
     }
