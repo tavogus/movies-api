@@ -40,7 +40,7 @@ public class CategoryService {
         return categoryAssembler.toCollectionModel(categoryRepository.findAll());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CategoryModel getCategory(Long id){
         Category category = findOrFail(id);
 

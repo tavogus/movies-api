@@ -14,6 +14,7 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -80,7 +81,9 @@ public class TvShowService {
             throw new CategoryNotFoundException("No category found");
         }
 
-        return tvShowAssembler.toCollectionModel(tvShowRepository.findMoviesByCategory(category.get().getId()));
+        List<TvShow> tvShows = tvShowRepository.findMoviesByCategory(category.get().getId());
+
+        return tvShowAssembler.toCollectionModel(tvShows);
     }
 
     @Transactional(readOnly = true)
@@ -91,7 +94,9 @@ public class TvShowService {
             throw new ActorNotFoundException("No actor found");
         }
 
-        return tvShowAssembler.toCollectionModel(tvShowRepository.findTvShowsByActorsId(actor.get().getId()));
+        List<TvShow> tvShows = tvShowRepository.findTvShowsByActorsId(actor.get().getId());
+
+        return tvShowAssembler.toCollectionModel(tvShows);
     }
 
     private TvShow findOrFail(Long id) {

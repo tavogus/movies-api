@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -87,7 +89,9 @@ public class MovieService {
             throw new CategoryNotFoundException("No category found");
         }
 
-        return movieAssembler.toCollectionModel(movieRepository.findMoviesByCategory(category.get().getId()));
+        List<Movie> movies = movieRepository.findMoviesByCategory(category.get().getId());
+
+        return movieAssembler.toCollectionModel(movies);
     }
     @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByActor(String actorName) {
@@ -96,8 +100,9 @@ public class MovieService {
         if (!actor.isPresent()) {
             throw new ActorNotFoundException("No actor found");
         }
+        List<Movie> movies = movieRepository.findMoviesByActorsId(actor.get().getId());
 
-        return movieAssembler.toCollectionModel(movieRepository.findMoviesByActorsId(actor.get().getId()));
+        return movieAssembler.toCollectionModel(movies);
     }
 
     private Movie findOrFail(Long id) {
