@@ -14,11 +14,12 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     List<Movie> findByTitleContaining(String Title);
 
-    @Query("from Movie m where m.category.id =:category ")
+    @Query("from Movie m where m.category.id = :category ")
     List<Movie> findMoviesByCategory(@Param("category")  Long id);
 
 
-    List<Movie> findMoviesByActorsId(Long id);
+    @Query("SELECT m FROM Movie m JOIN m.actors a WHERE a.name LIKE %?1%")
+    List<Movie> findMoviesByActorsName(String name);
 
     Optional<Movie> findByTitle(String title);
 }

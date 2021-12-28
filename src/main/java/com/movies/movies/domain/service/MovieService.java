@@ -95,12 +95,8 @@ public class MovieService {
     }
     @Transactional(readOnly = true)
     public CollectionModel<MovieModel> findByActor(String actorName) {
-        Optional<Actor> actor = actorRepository.findByName(actorName);
 
-        if (!actor.isPresent()) {
-            throw new ActorNotFoundException("No actor found");
-        }
-        List<Movie> movies = movieRepository.findMoviesByActorsId(actor.get().getId());
+        List<Movie> movies = movieRepository.findMoviesByActorsName(actorName);
 
         return movieAssembler.toCollectionModel(movies);
     }

@@ -88,13 +88,8 @@ public class TvShowService {
 
     @Transactional(readOnly = true)
     public CollectionModel<TvShowModel> findByActor(String actorName) {
-        Optional<Actor> actor = actorRepository.findByName(actorName);
 
-        if (!actor.isPresent()) {
-            throw new ActorNotFoundException("No actor found");
-        }
-
-        List<TvShow> tvShows = tvShowRepository.findTvShowsByActorsId(actor.get().getId());
+        List<TvShow> tvShows = tvShowRepository.findTvShowsByActorsName(actorName);
 
         return tvShowAssembler.toCollectionModel(tvShows);
     }

@@ -17,5 +17,6 @@ public interface TvShowRepository extends JpaRepository<TvShow, Long> {
 
     Optional<TvShow> findByTitle(String title);
 
-    List<TvShow> findTvShowsByActorsId(Long id);
+    @Query("SELECT t FROM TvShow t JOIN t.actors a WHERE a.name LIKE %?1%")
+    List<TvShow> findTvShowsByActorsName(String name);
 }
