@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface TvShowRepository extends JpaRepository<TvShow, Long> {
 
-    @Query("from TvShow t where t.category.id =:category ")
-    List<TvShow> findMoviesByCategory(@Param("category")Long id);
-
     List<TvShow> findByTitleContaining(String title);
 
     Optional<TvShow> findByTitle(String title);
 
     @Query("SELECT t FROM TvShow t JOIN t.actors a WHERE a.name LIKE %?1%")
     List<TvShow> findTvShowsByActorsName(String name);
+
+    @Query("SELECT t FROM TvShow t JOIN t.category c WHERE c.name LIKE %?1%")
+    List<TvShow> findMoviesByCategoryName(String categoryName);
 }

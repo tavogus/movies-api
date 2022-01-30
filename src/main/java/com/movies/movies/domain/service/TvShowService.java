@@ -75,13 +75,11 @@ public class TvShowService {
 
     @Transactional(readOnly = true)
     public CollectionModel<TvShowModel> findByCategory(String categoryName) {
-        Optional<Category> category = categoryRepository.findByName(categoryName);
+        List<TvShow> tvShows = tvShowRepository.findMoviesByCategoryName(categoryName);
 
-        if (!category.isPresent()) {
-            throw new CategoryNotFoundException("No category found");
+        if (tvShows.isEmpty()) {
+            throw new TvShowNotFoundException("TvShow with this category not found");
         }
-
-        List<TvShow> tvShows = tvShowRepository.findMoviesByCategory(category.get().getId());
 
         return tvShowAssembler.toCollectionModel(tvShows);
     }
@@ -90,6 +88,10 @@ public class TvShowService {
     public CollectionModel<TvShowModel> findByActor(String actorName) {
 
         List<TvShow> tvShows = tvShowRepository.findTvShowsByActorsName(actorName);
+
+        if (tvShows.isEmpty()) {
+            throw new TvShowNotFoundException("TvShow with this actor not found");
+        }
 
         return tvShowAssembler.toCollectionModel(tvShows);
     }
