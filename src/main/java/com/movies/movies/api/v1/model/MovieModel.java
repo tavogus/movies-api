@@ -1,6 +1,5 @@
 package com.movies.movies.api.v1.model;
 
-import com.movies.movies.domain.model.Movie;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
